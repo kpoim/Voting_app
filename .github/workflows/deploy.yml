@@ -1,0 +1,25 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Build and Deploy
+      run: |
+        npm ci
+        npm run build
+        echo ${{ secrets.SSH_PRIVATE }} | tr -d '\r' | ssh-add - > /dev/null
+        chmod 600 ~/.ssh/id_rsa
+        git config --global user.name "GitHub Actions"
+        git config --global user.email "github-actions@users.noreply.github.com"
+        git remote set-url origin git@github.com:OWNER/REPO.git
+        git subtree push --prefix=build origin gh-pages
