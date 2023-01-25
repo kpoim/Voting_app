@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 export const Footer = styled.div`
-    justify-self: end;
+    margin: auto;
+    margin-bottom: 15px;
     display: flex;
     justify-content: space-between;
 `;

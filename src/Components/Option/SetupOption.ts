@@ -25,7 +25,6 @@ export const SetupOption = styled.div<SetupOptionProps>`
     }
 
     :hover, :focus, :focus-within {
-        border-color: #333;
         ${TextInput} {
             border-color: #333;
         }

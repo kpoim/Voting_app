@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Section from '../Section';
 
 export const Container1 = styled.div`
     display: flex;
@@ -20,5 +21,13 @@ export const Container = styled.div`
     header {
         grid-column-start: 1;
         grid-column-end: 4;
+        border-bottom: 2px solid black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    ${Section}:last-child {
+        border: none;
     }
 `;

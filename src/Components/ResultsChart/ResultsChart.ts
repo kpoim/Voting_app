@@ -6,7 +6,6 @@ export const ResultsChart = styled.div`
     border-bottom: 1px solid black;
     display: flex;
     align-items: end;
-    // gap: 10px;
     margin: 2rem auto;
     padding: 3rem 1rem 0 0;
 `;

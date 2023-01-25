@@ -40,18 +40,6 @@ const App: React.FC = () => {
         })
     }, []);
 
-    // const editAnswer = useCallback((newValue: string, index: number) => {
-    //     setOptions(currentOptions => {
-    //         const updatedOption = currentOptions[index];
-    //         updatedOption[0] = newValue;
-    //         return [
-    //             ...currentOptions.slice(0, index),
-    //             updatedOption,
-    //             ...currentOptions.slice(index + 1, currentOptions.length)
-    //         ]
-    //     })
-    // }, []);
-
     const prepareToEditOption = useCallback((optionName, index) => {
         setEditingAnswerValue(optionName);
         setEditingAnswerIndex(index);
@@ -106,9 +94,9 @@ const App: React.FC = () => {
     return (
         <div className="App">
         <Container>
-        <header className="App-header" style={{ height: "20vh" }}>
-            Sir vote-a-lot
-        </header>
+            <header>
+                <h2>Voting app</h2>
+            </header>
             <Section>
                 <TextInput
                     className="TitleInput"

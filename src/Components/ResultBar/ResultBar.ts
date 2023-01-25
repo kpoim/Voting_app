@@ -32,9 +32,5 @@ export const ResultBar = styled.div<ResultBarProps>`
         :first-child {
             top: -2rem;
         }
-
-        // :last-child {
-        //     bottom: -2rem;
-        // }
     }
 `;

@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import styled from 'styled-components';
 import { Options } from '../../App';
+import Footer from '../../Components/Footer';
 import ResultBar from '../../Components/ResultBar';
 import ResultsChart from '../../Components/ResultsChart';
 import Section from '../../Components/Section';
@@ -45,13 +46,13 @@ export const Results: React.FC<ResultsProps> = ({title, options}) => {
                                 }}
                             >
                                 <span>{option[1]}</span>
-                                {/* <span>{option[0]}</span> */}
                             </ResultBar>
                         ))}
                     </ResultsChart>
                     <Answers data-test="voted-options">
                         {votedOptions.map((option, index) => (
                             <li
+                                key={index}
                                 id={`option-text-${index}`}
                                 onPointerEnter={() => {
                                     document.querySelector(`#option-bar-${index}`)?.classList.add('highlight');
@@ -64,7 +65,7 @@ export const Results: React.FC<ResultsProps> = ({title, options}) => {
                             </li>
                         ))}
                     </Answers>
-                    <div>Total votes: {totalVoteCount}</div>
+                    <Footer>Total votes: {totalVoteCount}</Footer>
                 </>
                 : <div>No votes casted yet</div>
             }

@@ -1,9 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { Options } from '../../App';
 import Button from '../../Components/Button';
 import Section from '../../Components/Section';
 
-export const Voting: React.FC<any> = ({title, options, countVote}) => {
+interface VotingProps {
+    title: string | undefined;
+    options: Options;
+    countVote: (optionIndex: number) => void;
+}
+
+export const Voting: React.FC<VotingProps> = ({title, options, countVote}) => {
     const [ selectedOption, setSelectedOption ] = useState<string>();
 
     useEffect(() => {
@@ -15,11 +22,6 @@ export const Voting: React.FC<any> = ({title, options, countVote}) => {
     }, [options]);
 
     const handleVote = () => {
-        // setSelectedOption(current => {
-        //     const optionIndex = options.findIndex((option: any) => option[0] === current);
-        //     countVote(optionIndex);
-        //     return undefined;
-        // })
         const optionIndex = options.findIndex((option: any) => option[0] === selectedOption);
         countVote(optionIndex);
         setSelectedOption(undefined);
@@ -31,8 +33,7 @@ export const Voting: React.FC<any> = ({title, options, countVote}) => {
             {options.length
                 ? <>
                     <div
-                // @ts-ignore
-                        onChange={(e) => setSelectedOption(e.target.value)}
+                        onChange={(e) => setSelectedOption((e.target as HTMLInputElement).value)}
                         data-test="voting-options-wraper"
                     >
                         {options.map((option: any, index: number) => {
@@ -64,20 +65,6 @@ export const Voting: React.FC<any> = ({title, options, countVote}) => {
                 </>
                 : <div>No available options</div>
             }
-            {/* <div>current: {selectedOption}</div> */}
-            {/* <div>
-                {options.length 
-                    ? <Button
-                        variant="add"
-                        type="submit"
-                        onClick={handleVote}
-                        disabled={selectedOption === undefined || options.length < 2}
-                    >
-                        Vote
-                    </Button>
-                    : 'No available options'
-                }
-            </div> */}
         </Section>
     );
 }

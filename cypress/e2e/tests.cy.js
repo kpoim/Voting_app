@@ -1,8 +1,22 @@
 /// <reference types="cypress" />
-import cityOptions from '../fixtures/city-options';
-import { input80characters } from '../fixtures/constants';
 
 context('Actions', () => {
+  let cityOptions;
+  let eightyCharactersInput;
+  before(() => {
+    cy.fixture('city-options').then((options) => {
+      cityOptions = options;
+    })
+    eightyCharactersInput = (() => {
+      let text = '';
+      for (let i = 0; i < 8; i++) {
+          for(let y = 0; y < 10; y++) {
+              text = `${text}${y}`;
+          }
+      }
+      return text;
+    })();
+  })
   beforeEach(() => {
     cy.visit('http://localhost:12506/')
   })
@@ -32,6 +46,7 @@ context('Actions', () => {
   })
 
   it('should accept a new option and dislay it in the voting screen', () => {
+    console.log(cityOptions)
     cy.get('[data-test=new-option-input]').type(cityOptions[0])
     cy.get('[data-test=add-new-option-button]').should('be.enabled').click()
     cy.get('[data-test=new-option-input]').should('be.empty')
@@ -57,9 +72,9 @@ context('Actions', () => {
 
   it('should not allow more that 80 characters in the input fields', () => { 
     function testInputBySelector (selector) {
-      cy.get(selector).type(input80characters).invoke('val').should('have.length', 80)
+      cy.get(selector).type(eightyCharactersInput).invoke('val').should('have.length', 80)
       cy.get(selector).type('abc').invoke('val').should('have.length', 80)
-      cy.get(selector).should('have.value', input80characters)
+      cy.get(selector).should('have.value', eightyCharactersInput)
     }
     testInputBySelector('[data-test=title-input]')
 
@@ -78,6 +93,19 @@ context('Actions', () => {
     cy.get('[data-test=setup-option-0] button').click()
     cy.get('[data-test=new-option-input]').should('exist')
     cy.get('[data-test=add-new-option-button]').should('exist')
+  })
+
+  it('should clear everything on reset', () => {
+    cy.addOptions(2)
+    cy.selectOption(0)
+    cy.vote()
+
+    cy.get('[data-test=results-chart]').should('exist')
+
+    cy.get('[data-test=reset-button]').click().should('be.disabled')
+
+    cy.get('[data-test=voting-options-wraper]').should('not.exist')
+    cy.get('[data-test=results-chart]').should('not.exist')
   })
 
   it('should accept a vote and display the chart', () => {

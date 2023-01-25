@@ -8,8 +8,8 @@ export const Button = styled.button<ButtonProps>`
     padding: 5px 12px;
     background-color: #fff;
     border-radius: 5px;
-    color: ${({disabled}) => disabled ? '#aaa' : '#999'};
-    border: 1px solid ${({disabled}) => disabled ? '#aaa' : '#999'};
+    color: ${({disabled}) => disabled ? '#bbb' : '#777'};
+    border: 1px solid #999;
     cursor: ${({disabled}) => disabled ? 'not-allowed' : 'pointer'};
     line-height: 16px;
 
@@ -19,11 +19,11 @@ export const Button = styled.button<ButtonProps>`
         background-color: ${({variant, disabled}) => disabled ? '#fff' : variant === 'add' ? '#0e6da2' : '#e43b3b'};
 
         > svg {
-            fill: ${({disabled}) => disabled ? '#555' : '#fff'};
+            fill: ${({disabled}) => disabled ? '#bbb' : '#fff'};
         }
     }
 
     > svg {
-        fill: ${({disabled}) => disabled ? '#aaa' : '#999'};
+        fill: ${({disabled}) => disabled ? '#bbb' : '#777'};
     }
 `;
